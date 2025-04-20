@@ -109,9 +109,9 @@ chmod 600 ~/.ssh/authorized_keys
 
 # Configure SSH port
 if grep -q '^Port ' /etc/ssh/sshd_config; then
-    sed -i 's/^Port .*/Port $SSH_PORT/' /etc/ssh/sshd_config
+    sed -i "s/^Port .*/Port $SSH_PORT/" /etc/ssh/sshd_config
 else
-    echo 'Port $SSH_PORT' >> /etc/ssh/sshd_config
+    echo "Port $SSH_PORT" >> /etc/ssh/sshd_config
 fi
 
 # Set PATH
