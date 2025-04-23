@@ -1,5 +1,25 @@
 #!/data/data/com.termux/files/usr/bin/bash
 
+# Check if ngrok is installed, if not download and extract it
+if [ ! -f "./ngrok" ]; then
+    echo "[INFO] ngrok not found. Downloading ngrok..."
+    # Download ngrok for ARM (assuming Android device)
+    curl -O https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-linux-arm.tgz
+    
+    # Extract ngrok
+    tar xvzf ngrok-v3-stable-linux-arm.tgz
+    
+    # Make ngrok executable
+    chmod +x ngrok
+    
+    # Clean up
+    rm ngrok-v3-stable-linux-arm.tgz
+    
+    echo "[INFO] You need to authenticate ngrok. Run './ngrok authtoken YOUR_AUTH_TOKEN' with your token from ngrok.com"
+    echo "[INFO] Press Enter to continue once you've authenticated ngrok..."
+    read
+fi
+
 # Create a tmux session to keep it alive
 SESSION_NAME="ssh-tunnel"
 tmux has-session -t $SESSION_NAME 2>/dev/null
